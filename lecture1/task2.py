@@ -1,6 +1,0 @@
-name = input ("What is your name? ")
-print ("Hello ", name)
-age = input ("How old are u? ")
-print("You are ", age, " years old.")
-city = input ("Where are u living? ")
-print("You are living in ", city ,".")

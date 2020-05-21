@@ -1,21 +1,6 @@
-print("enter your four significant number for product: ")
-a = int(input())
-mult = 1
-while (a != 0):
-    mult = mult * (a % 10)
-    a = a // 10
-print("result: ", mult)
-
-print("enter your number for reverse: ")
-a = input()
-a = list(a)
-a.reverse()
-a = ''.join(a)
-print("reverse number: ", a)
-
-print("enter your four for sorted: ")
-a = input()
-a = list(a)
-a = sorted(a)
-a = ''.join(a)
-print("sorted number: ", a)
+name = input ("What is your name? ")
+print ("Hello ", name)
+age = input ("How old are u? ")
+print("You are ", age, " years old.")
+city = input ("Where are u living? ")
+print("You are living in ", city ,".")
