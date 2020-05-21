@@ -1,0 +1,5 @@
+print("Hi! Enter two your number!")
+
+a = int(input(" Enter number a: "))
+b = int(input(" Enter number b: "))
+print(a+b, a-b, a*b, a/b)
