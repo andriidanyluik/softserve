@@ -1,3 +1,4 @@
-def seredne_arefmetuchne(*args):
+def arithmetic_mean(*args):
+	"""function search arithmetic mean"""
     return sum(args)/len(args)
-print(seredne_arefmetuchne(2,2,2,3,6))
+print(arithmetic_mean(1,2,3,4))
