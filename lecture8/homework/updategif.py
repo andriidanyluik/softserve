@@ -40,6 +40,7 @@ def draw_window():
     x = random.randrange(100,900)
     y = 10
     screen.blit(meteor, (x,y))
+    #HOMEWORK
     pygame.display.flip()
     
 
