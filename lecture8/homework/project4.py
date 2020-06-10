@@ -1,19 +1,20 @@
 from random import randint
+import random
 import pygame
 pygame.init()
 pygame.time.set_timer(pygame.USEREVENT, 2000)# раз в 2 сек
-W = 959
-H = 720
+W = 950
+H = 700
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 HEIGTH_ROCKET = 100
  
 sc = pygame.display.set_mode((W, H))
-fireboll=('C:/Users/Andrii/Desktop/softserve/lecture8/homework/fireboll.png')
-bg = pygame.image.load('C:/Users/Andrii/Desktop/softserve/lecture8/homework/bg2.png')
-METEORS=('C:/Users/Andrii/Desktop/softserve/lecture8/homework/meteor2.png', 'C:/Users/Andrii/Desktop/softserve/lecture8/homework/meteor.png', 'C:/Users/Andrii/Desktop/softserve/lecture8/homework/meteor8.png')#список изображений
+fireboll=('C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/fireboll.png')
+bg = pygame.image.load('C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/bg2.png')
+METEORS=('C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/meteor2.png', 'C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/meteor.png', 'C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/meteor8.png')#список изображений
 METEORS_SURF=[]
-PILOTS =('C:/Users/Andrii/Desktop/softserve/lecture8/homework/fly.png','C:/Users/Andrii/Desktop/softserve/lecture8/homework/fly.png','C:/Users/Andrii/Desktop/softserve/lecture8/homework/fly.png')
+PILOTS =('C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/fly.png','C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/fly.png','C:/Users/adm.a.danyliuk/Desktop/softserve/lecture8/homework/fly.png')
 PILOTS_SURF = []
 bullets=[]
 font = pygame.font.Font(pygame.font.match_font('dejavusans'), 36)
@@ -33,6 +34,7 @@ def drawing():
     pygame.display.update()#оновити
     pygame.time.delay(20)
     meteors.update()
+
 
 class Meteor(pygame.sprite.Sprite):#класс метеоритів 
     def __init__(self, x, surf,group):
@@ -64,16 +66,17 @@ class Fly(pygame.sprite.Sprite):#Клас гравця, що оминає мет
 fly=Fly(200, PILOTS_SURF[1])#створення спрайту ракети
 sc.blit(fly.image, fly.rect)#
 
-# class Fire(pygame.sprite.Sprite):
-#     def __init__(self,x,y,radius,color):
-#         self.x=x
-#         self.y=y
-#         self.radius=radius
-#         self.color=color
-#         #self.facing=facing
-#         self.speed = 8
-#     def draw(self,sc):
-#         pygame.draw.circle(sc, self.color, (self.x, self.y, self.radius))
+class snaryad():
+    def __init__(self, x , y, color, facing):
+        self.x = x
+        self.y = y
+        self.color = color
+        self.facing = facing
+        self.vel = 8 * facing
+    def draw(self, win):
+        pygame.draw.rect(win, self.color, (pygame.Rect(self.x, self.y, 20 , 20)))  
+
+fireboll = snaryad(x)
 
 while 1:
     a=pygame.event.get()
@@ -89,8 +92,20 @@ while 1:
                 bullet.y += bullet.speed
             else:
                 bullet.pop(bullets.index(bullet))
+    
 
-    keys = pygame.key.get_pressed()#Відслідклвує чи зажата кнопка
+    if keys[pygame.K_f]:
+            facing = 1
+        if len(bullets) < 100:
+            bullets.append(snaryad(round(x + width), round(y - height),(255, 0, 0), facing))
+    
+
+        
+ 
+        if bullet.y < 500 and bullet.y > 0:
+            bullet.y -= bullet.vel
+        else:
+            bullets.pop(bullets.index(bullet))  
 
     if keys[pygame.K_RIGHT]:#рух вправо
         fly.rect.x+=5
